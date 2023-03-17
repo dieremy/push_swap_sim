@@ -1,5 +1,5 @@
 
-SRCS = main.c utils/ft_split.c
+SRCS = main.c utils/ft_split.c utils/ft_atoi.c
 OBJ = ${SRCS:.c=.o}
 NAME = push_swap
 LIBRARY := utils/ft_printf/libftprintf.a
@@ -9,7 +9,8 @@ CC = gcc
 
 all : 
 	@make -C $(FTPRINTF)
-	@$(CC) $(FLAG) $(SRCS) $(LIBRARY) -o $(NAME) -lz -g
+	@$(CC) $(FLAG) $(SRCS) $(LIBRARY) -o $(NAME) 
+# -lz -g PER MAC
 
 clean: 
 	@make fclean -C $(FTPRINTF)

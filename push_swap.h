@@ -6,7 +6,7 @@
 /*   By: startagl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:10:04 by startagl          #+#    #+#             */
-/*   Updated: 2023/03/17 16:30:00 by startagl         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:50:38 by startagl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@
 # include <stdint.h>
 
 char	**ft_split(char const *s, char c);
+int		ft_isdigit(int c);
+int		ft_atoi(char *str);
 #endif

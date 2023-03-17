@@ -6,7 +6,7 @@
 /*   By: startagl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 10:56:38 by startagl          #+#    #+#             */
-/*   Updated: 2023/03/17 16:30:59 by startagl         ###   ########.fr       */
+/*   Updated: 2023/03/17 21:27:15 by startagl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdint.h>
 
 int		ft_printf(const char *ptr, ...);
 int		ft_putchar(char c);
