@@ -6,10 +6,9 @@
 /*   By: startagl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:18:13 by startagl          #+#    #+#             */
-/*   Updated: 2023/03/17 22:01:13 by startagl         ###   ########.fr       */
+/*   Updated: 2023/03/18 12:31:29 by startagl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../push_swap.h"
 
@@ -64,5 +63,6 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	result *= sign;
+	// free(str);
 	return (result);
 }

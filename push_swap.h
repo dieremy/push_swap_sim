@@ -6,7 +6,7 @@
 /*   By: startagl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:10:04 by startagl          #+#    #+#             */
-/*   Updated: 2023/03/17 22:50:38 by startagl         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:27:41 by startagl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@
 # include <string.h>
 # include <stdint.h>
 
+typedef struct s_data
+{
+	int	*a;
+	int	*b;
+	int	len_a;
+	int	len_b;
+}				t_data;
+
 char	**ft_split(char const *s, char c);
 int		ft_isdigit(int c);
 int		ft_atoi(char *str);
+int		ft_free_mem(char **matrix, int f);
 #endif
