@@ -12,44 +12,19 @@
 
 #include "push_swap.h"
 
-/*
-	* PSEUDOCODE
-		- Per girare il visualizer (di default sta sul Turk Alghoritm) dare i comandi:
-		> pip3 install push_swap_gui
-		> python3 -m push_swap_gui
-		- Imposta un ambiente di lavoro funzionante (Makefile).
-		- Acquisisci numeri e mettili in una stack.
-			- Da gestire se nella stringa passo tra le virgolette piu numeri, deve considerarli tali (prendi le stringhe separate con split).
-			- Prendi con ATOI i numeri, e buttali dentro lo stack A.
-			! SE SONO TUTTI NUMERI FACCIO PER OGNUNO ATOI E LI METTO IN UN ARRAY CHE SAREBBE LA MIA PILA A
-			! INFILATI NELLA PILA CONTROLLO SE CI SONO DOPPIONI E CHE SIANO NEL RANGE INTERI (-2147483648 e 2147483647)
-
-		- Crea le funzioni che si occupano delle operazioni (SA, SA, SS, RA, RB, RR, RRA, RRB, RRR), le funzioni verranno eseguite quando vengono chiamate da terminale.
-		- Testa le funzioni con numeri casuali.
-		- Capisci quale algoritmo conviene utilizzare. (turk algorithm or LIS algorithm)
-*/
-
-t_data	*initialize_val(t_data *data, int counter)
+void	initialize_val(t_data *data, int counter)
 {
 	data->a = malloc(counter * sizeof(int));
 	data->b = malloc(counter * sizeof(int));
 	data->len_a = counter;
-	ft_printf("LEN A: %d\n", data->len_a);
 	data->len_b = 0;
-	return (data);
 }
 
 void	ft_free_data(t_data *data)
 {
-	// int i;
 	free(data->a);
 	free(data->b);
-	// i = 0;
-	// while (i < data->len_a)
-	// {
-		// free(data->a);
-	// }
-	
+	free(data);
 }
 
 void	ft_print_error(void)
@@ -123,25 +98,12 @@ int	get_input_num(char **av)
 	return (counter);
 }
 
-void	free_mat(char **str)
+t_data	*ft_fill_a(t_data *data, char **av)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-void	ft_fill_a(t_data *data, char **av)
-{
+	char	**value_to_split;
 	int		j;
 	int		i;
 	int		k;
-	char	**value_to_split;
 	
 	k = 0;
 	j = 1;
@@ -151,101 +113,36 @@ void	ft_fill_a(t_data *data, char **av)
 		value_to_split = ft_split(av[j], 32);
 		while (value_to_split[i])
 			i++;
-		ft_printf("Numero di valori del parametro inserito: %d\n", i);
 		if (i > 1)
 		{
 			i = 0;
 			while (value_to_split[i])
-			{
-				data->a[k] = ft_atoi(value_to_split[i]);
-				free(value_to_split[i]);
-				k++;
-				i++;
-			}
-			free(value_to_split);
+				data->a[k++] = ft_atoi(value_to_split[i++]);
 		}
 		else
-		{
-			data->a[k] = ft_atoi(value_to_split[0]);
-			free(value_to_split[0]);
-			k++;
-		}
+			data->a[k++] = ft_atoi(value_to_split[0]);
 		j++;
 	}
-	// free(value_to_split[i]);
-	// free(value_to_split);
-	// free_mat(value_to_split);
+	free(value_to_split);
+	return (data);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	char	**value_to_split;
-	int		i;
-	int		j;
-	int		k;
 	int		counter;
 
-	counter = 0;
-	k = 0;
-	// i = 0;
-	j = 1;
 	data = malloc(sizeof(t_data));
 	if (ac > 1)
 	{
 		counter = get_input_num(av);
-		data = initialize_val(data, counter);
-		// ft_fill_a(data, av);
-		while (av[j])
-		{
-			i = 0;
-			value_to_split = ft_split(av[j], 32);
-			while (value_to_split[i])
-			{
-				i++;
-				free(value_to_split[i]);
-			}
-			// free(value_to_split[i]);
-			free(value_to_split);			
-			ft_printf("Numero di valori del parametro inserito: %d\n", i);
-			if (i > 1)
-			{
-				i = 0;
-				value_to_split = ft_split(av[j], 32);
-				while (value_to_split[i])
-				{
-					data->a[k] = ft_atoi(value_to_split[i]);
-					ft_printf("VAL MULTI PAR: %d\n", data->a[k]);
-					free(value_to_split[i]);
-					i++;
-					k++;
-				}
-				free(value_to_split[i]);
-				// free(value_to_split);
-			}
-			else
-			{
-				value_to_split = ft_split(av[j], 32);
-				// ft_printf("VAL UNI PAR: %s\n", value_to_split[0]);
-				data->a[k] = ft_atoi(value_to_split[0]);
-				ft_printf("VAL UNI PAR: %d\n", data->a[k]);
-				free(value_to_split[0]);
-				k++;
-				free(value_to_split);
-			}
-			j++;
-		}
-		// free(value_to_split[i]);
-		// free(value_to_split);
+		initialize_val(data, counter);
+		data = ft_fill_a(data, av);
 	}
 	else
-	{
-		ft_printf("Few arguments:\n");
 		return (0);
-	}
+	ft_printf("LEN A: %d\n", data->len_a);
 	ft_print_stack_A(data);
 	ft_free_data(data);
-	free(data);
-	ft_printf("Non é stato passato alcun parametro:\n");
 	return (0);
 }

@@ -20,49 +20,75 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-static int	whitespaces(char *str, int *ptr_i)
-{
-	int	i;
+// static int	whitespaces(char *str, int *ptr_i)
+// {
+// 	int	i;
 
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == 43)
-	{
-		i++;
-		*ptr_i = i;
-		return (1);
-	}
-	else if (str[i] == 45)
-	{
-		i++;
-		*ptr_i = i;
-		return (-1);
-	}
-	else if (!(str[i] >= 48 && str[i] <= 57))
-	{
-		*ptr_i = i;
-		return (0);
-	}
-	*ptr_i = i;
-	return (1);
-}
+// 	i = 0;
+// 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+// 		i++;
+// 	if (str[i] == 43)
+// 	{
+// 		i++;
+// 		*ptr_i = i;
+// 		return (1);
+// 	}
+// 	else if (str[i] == 45)
+// 	{
+// 		i++;
+// 		*ptr_i = i;
+// 		return (-1);
+// 	}
+// 	else if (!(str[i] >= 48 && str[i] <= 57))
+// 	{
+// 		*ptr_i = i;
+// 		return (0);
+// 	}
+// 	*ptr_i = i;
+// 	return (1);
+// }
+
+// int	ft_atoi(char *str)
+// {
+// 	int	sign;
+// 	int	result;
+// 	int	i;
+
+// 	result = 0;
+// 	sign = whitespaces(str, &i);
+// 	while (str[i] && str[i] >= 48 && str[i] <= 57)
+// 	{
+// 		result *= 10;
+// 		result += str[i] - 48;
+// 		i++;
+// 	}
+// 	result *= sign;
+// 	// free(str);
+// 	return (result);
+// }
 
 int	ft_atoi(char *str)
 {
-	int	sign;
-	int	result;
-	int	i;
+	int	r;
+	int	s;
 
-	result = 0;
-	sign = whitespaces(str, &i);
-	while (str[i] && str[i] >= 48 && str[i] <= 57)
+	r = 0;
+	s = 1;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		result *= 10;
-		result += str[i] - 48;
-		i++;
+		if (*str == '-')
+			s = -1;
+		str++;
 	}
-	result *= sign;
-	// free(str);
-	return (result);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			ft_print_error();
+		r = r * 10 + (*str++) - 48;
+	}
+	if (r > 2147483647 || r < -2147483647)
+		ft_print_error();
+	return (r * s);
 }

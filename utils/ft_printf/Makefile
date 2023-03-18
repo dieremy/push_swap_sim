@@ -7,18 +7,18 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJS}
-	${LIBC} ${NAME} ${OBJS}
+	@${LIBC} ${NAME} ${OBJS}
 
 all: ${NAME}
 
 clean:
-	${RM} ${OBJS} ${OBJSB}
+	@${RM} ${OBJS} ${OBJSB}
 
 fclean: clean
-	${RM} ${NAME} 
+	@${RM} ${NAME} 
 
 re: fclean all
 
